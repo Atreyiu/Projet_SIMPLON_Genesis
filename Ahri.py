@@ -1662,7 +1662,7 @@ def perso_play(name,pygame_menu,window_size):
         item_5 = data.get('item_5')
         item_6 = data.get('item_6')
         with open('champ.csv', 'a', newline='') as csvfile:
-            spamwriter = csv.writer(csvfile, delimiter=';',
+            spamwriter = csv.writer(csvfile, delimiter=',',
                                     quotechar='|', quoting=csv.QUOTE_MINIMAL)
             spamwriter.writerow([champion]+[role]+[nombre_de_kills]+[nombre_assist]+[nombre_death]+[nombre_minions]+[total_coin]+[issue_match]+[pseudo]+[debut_game]+[fin_game]+[item_1]+[item_2]+[item_3]+[item_4]+[item_5]+[item_6])
 
@@ -1687,37 +1687,31 @@ def perso_play(name,pygame_menu,window_size):
 
     # EVALUTE KILS RATING WITH ANOTHER CHAMPS
     def total_kill_ahri():
-
-        df = pd.read_csv('total_kill_ahri.csv')
+        df = pd.read_csv('champ.csv')
 
         # epaisseur de la barre
         barWidth = 1
 
         # 1er set de barre : total / peut choisir un champion + une colone
-        x1 = df.loc[df.chamion == 'Arhi', 'kill']
+        x1 = df.loc[df.Champion == 'Ahri', 'Kills']
         kwargs = dict(alpha=0.6)
         plt.hist(x1, **kwargs, color='red', label='Ideal', width=barWidth)
 
         # 2eme set de barre : total / peut choisir un champion + une colone
-        x2 = df.loc[df.chamion == 'Blitz', 'kill']
+        x2 = df.loc[df.Champion == 'Ahri', 'Assists']
         kwargs = dict(alpha=0.8)
         plt.hist(x2, **kwargs, color='orange', label='Ideal', width=barWidth)
 
-        # 3eme set de barre : total / peut choisir un champion + une colone
-        x2 = df.loc[df.chamion == 'trynd', 'kill']
-        kwargs = dict(alpha=0.8)
-        plt.hist(x2, **kwargs, color='blue', label='Ideal', width=barWidth)
-
         # Tout ce qui est titre
         # legend
-        plt.legend(['Arhi', 'Blitz', 'Tryndamere'])
+        plt.legend(['KIll', 'Assist'])
 
         # nom x et y
         plt.ylabel('Fréquence')
         plt.xlabel('Echelle')
 
         # titre
-        plt.title('Comparaison des Kill')
+        plt.title('Total Kill/Assist de Ahri')
         plt.show()
 
     def data_fun():

@@ -135,6 +135,9 @@ def main(test=False):
     def open_Journal_Mediapart():
         webbrowser.open_new("https://www.mediapart.fr/")
 
+    def open_visit_our_website():
+        webbrowser.open_new("https://atreyiu.github.io/portfolio_team/")
+
 
 
     # -------------------------------------------------------------------------
@@ -680,9 +683,7 @@ def main(test=False):
     main_menu.add_button('Champions List', button_column_menu)
     main_menu.add_button(help_menu.get_title(), help_menu)  # Add help submenu
     main_menu.add_button('Profil settings', settings_menu)
-
-    #main_menu.add_button('More Settings', more_settings_menu)
-    #main_menu.add_button('Menu in textures and columns', button_column_menu)
+    main_menu.add_button('Visit our Website', open_visit_our_website )
     main_menu.add_button('Credits', about_menu)
     main_menu.add_selector('Sounds Effects ',
                            [('Off', False), ('On', True)],
@@ -690,9 +691,6 @@ def main(test=False):
     main_menu.add_label("")
     main_menu.add_button('Quit', pygame_menu.events.EXIT)
 
-   # assert main_menu.get_widget('first_name', recursive=True) is wid1
-   # assert main_menu.get_widget('last_name', recursive=True) is wid2
-   # assert main_menu.get_widget('last_name') is None
 
     # WELCOME SOUND
     mixer.music.load('welcome.mp3')
