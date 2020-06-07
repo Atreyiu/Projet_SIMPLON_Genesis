@@ -1685,6 +1685,41 @@ def perso_play(name,pygame_menu,window_size):
         # print(alb)
         plt.show()
 
+    # EVALUTE KILS RATING WITH ANOTHER CHAMPS
+    def total_kill_ahri():
+
+        df = pd.read_csv('total_kill_ahri.csv')
+
+        # epaisseur de la barre
+        barWidth = 1
+
+        # 1er set de barre : total / peut choisir un champion + une colone
+        x1 = df.loc[df.chamion == 'Arhi', 'kill']
+        kwargs = dict(alpha=0.6)
+        plt.hist(x1, **kwargs, color='red', label='Ideal', width=barWidth)
+
+        # 2eme set de barre : total / peut choisir un champion + une colone
+        x2 = df.loc[df.chamion == 'Blitz', 'kill']
+        kwargs = dict(alpha=0.8)
+        plt.hist(x2, **kwargs, color='orange', label='Ideal', width=barWidth)
+
+        # 3eme set de barre : total / peut choisir un champion + une colone
+        x2 = df.loc[df.chamion == 'trynd', 'kill']
+        kwargs = dict(alpha=0.8)
+        plt.hist(x2, **kwargs, color='blue', label='Ideal', width=barWidth)
+
+        # Tout ce qui est titre
+        # legend
+        plt.legend(['Arhi', 'Blitz', 'Tryndamere'])
+
+        # nom x et y
+        plt.ylabel('Fréquence')
+        plt.xlabel('Echelle')
+
+        # titre
+        plt.title('Comparaison des Kill')
+        plt.show()
+
     def data_fun():
         """
         Print data of the menu.
@@ -1791,6 +1826,7 @@ def perso_play(name,pygame_menu,window_size):
     define_story_sound(name, play_submenu)
     play_submenu.add_button('Enregistrer les Données de ma dernière partie', settings_menu)
     play_submenu.add_button('Consulter KDA', read_csv_ahri)
+    play_submenu.add_button('Comparatif kills par persos', total_kill_ahri)
     #play_submenu.add_button('Consulter historique 10 dernières parties')
     play_submenu.add_button('Accéder à OP GG', open_OP_GG)
     play_submenu.add_button('Back to Main Menu', pygame_menu.events.BACK)
