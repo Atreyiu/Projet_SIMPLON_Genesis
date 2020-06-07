@@ -1721,8 +1721,8 @@ def perso_play(name,pygame_menu,window_size):
         :return: None
         """
         # CONNECTION TO MYSQL WORKBENCH DATABASE
-        baseDeDonnees = mysql.connector.connect(host="localhost", user="root", password="j0nathan13",
-                                                database="champions_list")
+        baseDeDonnees = mysql.connector.connect(host="localhost", user="newuser", password="password",
+                                                database="performances_LoL")
         cursor = baseDeDonnees.cursor()
 
         # WE CREATE DATA VARIABLE TO ASSIGN THE INPUT VALUES ON FORM
@@ -1819,8 +1819,8 @@ def perso_play(name,pygame_menu,window_size):
     play_submenu.add_label('')
     define_story_sound(name, play_submenu)
     play_submenu.add_button('Enregistrer les Données de ma dernière partie', settings_menu)
-    play_submenu.add_button('Consulter KDA', read_csv_ahri)
-    play_submenu.add_button('Comparatif kills par persos', total_kill_ahri)
+    play_submenu.add_button('Statistiques temporelles', read_csv_ahri)
+    play_submenu.add_button('Comparatif kills/assist', total_kill_ahri)
     #play_submenu.add_button('Consulter historique 10 dernières parties')
     play_submenu.add_button('Accéder à OP GG', open_OP_GG)
     play_submenu.add_button('Back to Main Menu', pygame_menu.events.BACK)

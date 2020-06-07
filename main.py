@@ -16,6 +16,9 @@ import webbrowser
 import mysql.connector # Package name mysql-connector-python
 # Switch named ahri to obtain correct sounds / images / description
 import Ahri as ahri
+import csv
+import pandas as pd
+from matplotlib import pyplot as plt
 
 #yoles sangs
 # -----------------------------------------------------------------------------
@@ -163,8 +166,8 @@ def main(test=False):
     mixer.init()
 
     #Init DB
-    baseDeDonnees = mysql.connector.connect(host="localhost", user="root", password="j0nathan13",
-                                            database="champions_list")
+    baseDeDonnees = mysql.connector.connect(host="localhost", user="newuser", password="password",
+                                            database="performances_LoL")
     cursor = baseDeDonnees.cursor()
 
     # REFRESH TABLE IN CASE WE USE
@@ -240,7 +243,48 @@ def main(test=False):
                                selector_id='difficulty',
                                default=1)
 
+    def victoire_defaite():
 
+        df = pd.read_csv('ohohoh.csv')
+
+        df.groupby(['issue', 'chamion']).size().unstack().plot(kind='bar', stacked=True)
+
+        plt.title("Total de victoires et défaites par personnage")
+
+        plt.show()
+
+    def comparatif():
+        df = pd.read_csv('ohohoh.csv')
+
+        # epaisseur de la barre
+        barWidth = 1
+
+        # 1er set de barre : total / peut choisir un champion + une colone
+        x1 = df.loc[df.chamion == 'Arhi', 'kill']
+        kwargs = dict(alpha=0.6)
+        plt.hist(x1, **kwargs, color='red', label='Ideal', width=barWidth)
+
+        # 2eme set de barre : total / peut choisir un champion + une colone
+        x2 = df.loc[df.chamion == 'Blitz', 'kill']
+        kwargs = dict(alpha=0.8)
+        plt.hist(x2, **kwargs, color='orange', label='Ideal', width=barWidth)
+
+        # 3eme set de barre : total / peut choisir un champion + une colone
+        x2 = df.loc[df.chamion == 'trynd', 'kill']
+        kwargs = dict(alpha=0.8)
+        plt.hist(x2, **kwargs, color='blue', label='Ideal', width=barWidth)
+
+        # Tout ce qui est titre
+        # legend
+        plt.legend(['Arhi', 'Blitz', 'Tryndamere'])
+
+        # nom x et y
+        plt.ylabel('Fréquence')
+        plt.xlabel('Echelle')
+
+        # titre
+        plt.title('Comparaison des Kill')
+        plt.show()
 
     # FUCNTION CALLED WITH STORE DATA BUTTON ( TAKE CSV PARAMETERS AND WORKBENCH )
 
@@ -251,7 +295,7 @@ def main(test=False):
         :return: None
         """
         # CONNECTION TO MYSQL WORKBENCH DATABASE
-        baseDeDonnees = mysql.connector.connect(host="localhost",user="root",password="j0nathan13", database="performances_LoL")
+        baseDeDonnees = mysql.connector.connect(host="localhost",user="newuser",password="password", database="performances_LoL")
         cursor = baseDeDonnees.cursor()
 
 
@@ -676,25 +720,20 @@ def main(test=False):
         theme=main_menu_theme,
     )
 
-
-    main_menu.add_label("Welcome to Genesis SOFTWARE")
-    main_menu.add_label("")
-
     main_menu.add_button('Champions List', button_column_menu)
-    main_menu.add_button(help_menu.get_title(), help_menu)  # Add help submenu
+
+    main_menu.add_button('Voir mes victoires / défaites', victoire_defaite)
+    main_menu.add_button('Comparatif nombre de kill', comparatif)
+    main_menu.add_button('Visit our Website', open_visit_our_website)
+
     main_menu.add_button('Profil settings', settings_menu)
-    main_menu.add_button('Visit our Website', open_visit_our_website )
     main_menu.add_button('Credits', about_menu)
+    main_menu.add_button(help_menu.get_title(), help_menu)  # Add help submenu
     main_menu.add_selector('Sounds Effects ',
                            [('Off', False), ('On', True)],
                            onchange=update_menu_sound)
     main_menu.add_label("")
     main_menu.add_button('Quit', pygame_menu.events.EXIT)
-
-
-    # WELCOME SOUND
-    mixer.music.load('welcome.mp3')
-    mixer.music.play()
 
     # -------------------------------------------------------------------------
     # Main loop
