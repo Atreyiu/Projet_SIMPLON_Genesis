@@ -44,6 +44,9 @@ HELP = ['Press ESC to enable/disable Menu',
         'Press UP/DOWN to move through Menu',
         'Press LEFT/RIGHT to move through Selectors']
 
+icon = pygame.image.load('icone.png')
+pygame.display.set_icon(icon)
+
 # -----------------------------------------------------------------------------
 # Methods engineering
 # -----------------------------------------------------------------------------
