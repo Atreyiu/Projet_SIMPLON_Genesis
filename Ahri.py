@@ -1533,7 +1533,7 @@ def perso_play(name,pygame_menu,window_size):
     submenu_theme = pygame_menu.themes.THEME_DEFAULT.copy()
     submenu_theme.widget_font_size = 15
     play_submenu = pygame_menu.Menu(
-        height=window_size[1] * 0.9,
+        height=window_size[1] * 0.8,
         theme=submenu_theme,
         title=name,
         width=window_size[0] * 0.9,

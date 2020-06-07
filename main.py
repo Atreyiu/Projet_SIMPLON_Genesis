@@ -160,6 +160,7 @@ def main(test=False):
     surface = pygame.display.set_mode(WINDOW_SIZE)
     # WINDOW TITLE
     pygame.display.set_caption('@ Personnal LoL Trainer')
+    #permet de comptabiliser le temps : temps de mouvement de bouton
     clock = pygame.time.Clock()
 
     # Init Mixer
@@ -245,38 +246,38 @@ def main(test=False):
 
     def victoire_defaite():
 
-        df = pd.read_csv('ohohoh.csv')
+        df = pd.read_csv('champ.csv')
 
-        df.groupby(['issue', 'chamion']).size().unstack().plot(kind='bar', stacked=True)
+        df.groupby(['issue', 'Champion']).size().unstack().plot(kind='bar', stacked=True)
 
         plt.title("Total de victoires et défaites par personnage")
 
         plt.show()
 
     def comparatif():
-        df = pd.read_csv('ohohoh.csv')
+        df = pd.read_csv('champ.csv')
 
         # epaisseur de la barre
         barWidth = 1
 
         # 1er set de barre : total / peut choisir un champion + une colone
-        x1 = df.loc[df.chamion == 'Arhi', 'kill']
+        x1 = df.loc[df.Champion == 'Ahri', 'Kills']
         kwargs = dict(alpha=0.6)
         plt.hist(x1, **kwargs, color='red', label='Ideal', width=barWidth)
 
         # 2eme set de barre : total / peut choisir un champion + une colone
-        x2 = df.loc[df.chamion == 'Blitz', 'kill']
-        kwargs = dict(alpha=0.8)
-        plt.hist(x2, **kwargs, color='orange', label='Ideal', width=barWidth)
+        x2 = df.loc[df.Champion == 'Blitz', 'Kills']
+        kwargs = dict(alpha=0.5)
+        plt.hist(x2, **kwargs, color='green', label='Ideal', width=barWidth)
 
         # 3eme set de barre : total / peut choisir un champion + une colone
-        x2 = df.loc[df.chamion == 'trynd', 'kill']
-        kwargs = dict(alpha=0.8)
-        plt.hist(x2, **kwargs, color='blue', label='Ideal', width=barWidth)
+        x2 = df.loc[df.Champion == 'Tryyndamere', 'Kills']
+        kwargs = dict(alpha=1)
+        plt.hist(x2, **kwargs, color='black', label='Ideal', width=barWidth)
 
         # Tout ce qui est titre
         # legend
-        plt.legend(['Arhi', 'Blitz', 'Tryndamere'])
+        plt.legend(['Ahri', 'Blitz', 'Tryndamere'])
 
         # nom x et y
         plt.ylabel('Fréquence')
@@ -359,7 +360,7 @@ def main(test=False):
 
     button_column_menu = pygame_menu.Menu(
         columns=3,
-        height=WINDOW_SIZE[1] * 0.85,
+        height=WINDOW_SIZE[1] * 0.7,
         onclose=pygame_menu.events.DISABLE_CLOSE,
         rows=50,
         theme=button_column_menu_theme,
@@ -720,16 +721,16 @@ def main(test=False):
         theme=main_menu_theme,
     )
 
-    main_menu.add_button('Champions List', button_column_menu)
+    main_menu.add_button('Liste des Champions', button_column_menu)
 
     main_menu.add_button('Voir mes victoires / défaites', victoire_defaite)
     main_menu.add_button('Comparatif nombre de kill', comparatif)
-    main_menu.add_button('Visit our Website', open_visit_our_website)
+    main_menu.add_button('Visitez notre site web', open_visit_our_website)
 
-    main_menu.add_button('Profil settings', settings_menu)
+    main_menu.add_button('Paramètres', settings_menu)
     main_menu.add_button('Credits', about_menu)
     main_menu.add_button(help_menu.get_title(), help_menu)  # Add help submenu
-    main_menu.add_selector('Sounds Effects ',
+    main_menu.add_selector('Effet Sonore',
                            [('Off', False), ('On', True)],
                            onchange=update_menu_sound)
     main_menu.add_label("")
