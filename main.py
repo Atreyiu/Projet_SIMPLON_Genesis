@@ -318,32 +318,6 @@ def main(test=False):
     )
 
 
-   # for i in range(12):
-    #    button_column_menu.add_button('Button {0}'.format(i), pygame_menu.events.BACK)
-
-
-   # button_column_menu.add_button(
-    #    'Return to main menu', pygame_menu.events.BACK,
-     #   background_color=pygame_menu.baseimage.BaseImage(
-      #      image_path=pygame_menu.baseimage.IMAGE_EXAMPLE_METAL
-       # )
-   # )
-
-    #button_column_menu.add_button('Journal Mediapart', open_Journal_Mediapart)
-    #button_column_menu.add_button('Youtube Playlist', open_youtube_playlist)
-    #button_column_menu.add_button('Youtube', open_youtube)
-    #button_column_menu.add_button('Journal le Monde', open_Journal_le_monde)
-    #button_column_menu.add_button('Instagram', open_Instagram)
-    #button_column_menu.add_button('Twitter', open_Twitter)
-    #button_column_menu.add_button('Facebook', open_Facebook)
-    #button_column_menu.add_button('TF1 Direct', open_TF1_Direct)
-    #button_column_menu.add_button('My Bank', open_compte_nickel)
-    #button_column_menu.add_button('Google Drive', open_google_drive)
-    #button_column_menu.add_button('Back to Main Menu', pygame_menu.events.BACK)
-
-
-
-
     # Aatrox BUTTON IN DASHBOARD
     button_column_menu.add_button('Aatrox', ahri.perso_play('Aatrox', pygame_menu, WINDOW_SIZE))
     # AHRI BUTTON IN DASHBORD

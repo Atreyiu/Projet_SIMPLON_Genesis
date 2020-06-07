@@ -1641,18 +1641,7 @@ def perso_play(name,pygame_menu,window_size):
                                  textinput_id='item_6',
                                  maxwidth=19)
 
-    #settings_menu.add_text_input('password: ',
-    #                             maxchar=8,
-    #                             password=True,
-    #                             textinput_id='password')
 
-    # Create selector with 3 difficulty options
-    #settings_menu.add_selector('Select difficulty ',
-    #                           [('Easy', 'EASY'),
-    #                            ('Medium', 'MEDIUM'),
-    #                            ('Hard', 'HARD')],
-    #                           selector_id='difficulty',
-    #                           default=1)
 
     def input_csv(data):
         champion = data.get('champion')
